@@ -20,14 +20,15 @@ var emitter = new EventEmitter();
 ####Without EventListener
 
 ```js
+var eventName = 'eventName';
 var listener = function(payload) {
-  console.log('Event ' + listener.event + ' triggered: ' + playload);
+  console.log('Event ' + eventName + ' triggered with: ' + playload);
 };
 
-emitter.on('eventName', listener);
+emitter.on(eventName, listener);
 
 //sometime later..
-emitter.off('eventName', listener);
+emitter.off(eventName, listener);
 ``` 
 
 ####With EventListener
@@ -35,12 +36,9 @@ emitter.off('eventName', listener);
 ```js
 var EventListener = require('evt-listener');
 
-//create our listener
-var eventNameListener = new EventListener(emitter, 'eventName');
-
-//give it a handler
-eventNameListener.on(function(payload) {
-  console.log('Event ' + listener.event + ' triggered: ' + playload);
+//create our listener, giving it a handler
+var eventNameListener = new EventListener(emitter, 'eventName').on(function(payload) {
+  console.log('Event ' + eventNameListener.event + ' triggered with: ' + playload);
 });
 
 //sometime later..
