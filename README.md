@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bmullan91/evt-listener.svg?branch=master)](https://travis-ci.org/bmullan91/evt-listener)
+
 #evt-listener
 
 ###What is it?
@@ -10,7 +12,7 @@ Whenever you create an event listener, if you want to **off** the event, you mus
 
 Creating an EventListener allows you to just call **off** without having to worry about saving and passing the function. See below for a comparison.
 
-##Install
+##First install it
 
 With npm, saving it as a dependency.
 
@@ -23,9 +25,12 @@ var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 ```
 
+#Comparison
+
 ####Without EventListener
 
 ```js
+//we have to save event name and the listener
 var eventName = 'eventName';
 var listener = function(payload) {
   console.log('Event ' + eventName + ' triggered with: ' + playload);
@@ -33,7 +38,7 @@ var listener = function(payload) {
 
 emitter.on(eventName, listener);
 
-//sometime later..
+//sometime later...
 emitter.off(eventName, listener);
 ``` 
 
@@ -49,13 +54,13 @@ eventNameListener.on(function(payload) {
   console.log('Event ' + eventNameListener.event + ' triggered with: ' + playload);
 });
 
-//sometime later..
+//sometime later...
 eventNameListener.off();
 ``` 
 
-##Tip
+##Tips
 
-You can chain your listener function after you create your instance.
+__1.__ You can chain your listener function after you create the EventListener instance.
 
 ```js
 //create our listener, giving it a handler
@@ -69,6 +74,20 @@ var eventNameListener = new EventListener(emitter, 'eventName').once(function(pa
 });
 ```
 
+__2.__ Like the default *events* module, which exposes the class as .EventEmitter, the same goes for EventListener.
+
+```js
+var EventListener = require('evt-listener').EventListener;
+```
+
+__3.__If you don't like using the new keyword in javascript, no worries.
+
+```js
+var EventListener = require('evt-listener');
+var listener = EventListener(emitter, 'eventName');
+
+```
+
 ##PS
 
-Check out [evt-emitter](https://www.npmjs.org/package/evt-emitter) which simply add's a *createListener* factory along with the default events module.
+Check out [evt-emitter](https://www.npmjs.org/package/evt-emitter) which simply add's a *createListener* factory method on the events EventEmitter prototype. This allows you to create instance's of EventListener without having to pass an event emitter.
