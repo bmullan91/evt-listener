@@ -6,7 +6,6 @@ var EventListener = require('../');
 var emitter = new EventEmitter();
 var eventName = 'eventName';
 
-
 describe('validation checks', function() {
 
   it('should throw if 0 param\'s passed', function() {
@@ -38,6 +37,10 @@ describe('validation checks', function() {
 
 describe('work\'s like any other event listener', function() {
 
+  beforeEach(function cleanup() {
+    emitter.removeAllListeners(eventName);
+  });
+
   it('should work with on, and off', function() {
     var listener = EventListener(emitter, eventName);
     //test state to check if the event listeners are triggered
@@ -46,7 +49,6 @@ describe('work\'s like any other event listener', function() {
     //Step 1.
     //add an on function for the listener
     listener.on(function() {
-      //toggle
       onTriggered++;
     });
 
@@ -74,29 +76,43 @@ describe('work\'s like any other event listener', function() {
   it('should work with once and off', function() {
     var listener = EventListener(emitter, eventName);
     //test state to check if the event listeners are triggered
-    var onTriggered = 0;
+    var onceTriggered = 0;
 
     //Step 1.
     //add an once function for the listener
     listener.once(function() {
-      //toggle
-      onTriggered++;
+      onceTriggered++;
     });
 
     //check it's been added to the list of listeners
     expect(emitter.listeners(eventName)).to.have.length(1);
 
     //test emitting and recieving the event via 'once'
-    var previousTriggerCount = onTriggered;
+    var previousTriggerCount = onceTriggered;
     emitter.emit(eventName);
-    expect(onTriggered).to.equal(++previousTriggerCount);
+    expect(onceTriggered).to.equal(++previousTriggerCount);
 
     //test that triggering a second event does not register.
     emitter.emit(eventName);
-    expect(onTriggered).to.equal(previousTriggerCount);
+    expect(onceTriggered).to.equal(previousTriggerCount);
 
     //check the listener has been removed
     expect(emitter.listeners(eventName)).to.have.length(0);
+  });
+
+  it('should enable chaining', function() {
+    var listener = EventListener(emitter, eventName).on(function() {});
+
+    //check calling 'on' returns the instance
+    expect(listener).to.be.an.instanceof(EventListener);
+
+    //create a new listener using once
+    listener = EventListener(emitter, eventName).once(function() {});
+    //check calling 'on' returns the instance
+    expect(listener).to.be.an.instanceof(EventListener);
+
+    //off'ing the listener also returns the instance
+    expect(listener.off()).to.be.an.instanceof(EventListener);
   });
 
 });
