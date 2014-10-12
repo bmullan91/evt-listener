@@ -8,7 +8,7 @@ A class encapsulating an event and it's listener together.
 
 ###Why would you use it?
 
-Whenever you create an event listener, if you want to **off** the event you must pass the same function you passed to **on** to **off** the event correctly.
+Whenever you create an event listener, and you want to **off** the event you must pass the same function you passed to **on** to **off** the event correctly.
 
 Creating an EventListener allows you to just call **off** without having to worry about saving and passing the function. See below for a comparison.
 
@@ -47,7 +47,7 @@ emitter.off(eventName, listener);
 ```js
 var EventListener = require('evt-listener');
 
-//create our listener
+//create a listener
 var eventNameListener = new EventListener(emitter, 'eventName');
 
 eventNameListener.on(function(payload) {
@@ -63,7 +63,7 @@ eventNameListener.off();
 __1.__ You can chain your listener function after you create the EventListener instance.
 
 ```js
-//create our listener, giving it a handler
+//create a listener, giving it a handler
 var listener = new EventListener(emitter, 'eventName').on(function(payload) {
   console.log('Event ' + listener.event + ' triggered with: ' + playload);
 });
