@@ -21,15 +21,18 @@ function EventListener(emitter, event) {
 EventListener.prototype.on = function(cb) {
   this.cb = cb;
   this.emitter.on(this.event, cb);
+  return this;
 };
 
 EventListener.prototype.once = function(cb) {
   this.cb = cb;
   this.emitter.once(this.event, cb);
+  return this;
 };
 
 EventListener.prototype.off = function() {
   this.emitter.removeListener(this.event, this.cb);
+  return this;
 };
 
 module.exports = EventListener;
