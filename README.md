@@ -10,6 +10,12 @@ Whenever you create an event listener, if you want to **off** the event, you mus
 
 Creating an EventListener allows you to just call **off** without having to worry about saving and passing the function. See below for a comparison.
 
+##Install
+
+With npm, saving it as a dependency.
+
+    npm i evt-listener --save
+
 First off, they both share the same event emitter boilerplate code:
 
 ```js
@@ -36,8 +42,10 @@ emitter.off(eventName, listener);
 ```js
 var EventListener = require('evt-listener');
 
-//create our listener, giving it a handler
-var eventNameListener = new EventListener(emitter, 'eventName').on(function(payload) {
+//create our listener
+var eventNameListener = new EventListener(emitter, 'eventName');
+
+eventNameListener.on(function(payload) {
   console.log('Event ' + eventNameListener.event + ' triggered with: ' + playload);
 });
 
@@ -45,12 +53,22 @@ var eventNameListener = new EventListener(emitter, 'eventName').on(function(payl
 eventNameListener.off();
 ``` 
 
-##Install
-
-With npm, saving it as a dependency.
-
-    npm i evt-listener --save
-
 ##Tip
+
+You can chain your listener function after you create your instance.
+
+```js
+//create our listener, giving it a handler
+var eventNameListener = new EventListener(emitter, 'eventName').on(function(payload) {
+  console.log('Event ' + eventNameListener.event + ' triggered with: ' + playload);
+});
+
+//same goes for once
+var eventNameListener = new EventListener(emitter, 'eventName').once(function(payload) {
+  console.log('Event ' + eventNameListener.event + ' triggered with: ' + playload);
+});
+```
+
+##PS
 
 Check out [evt-emitter](https://www.npmjs.org/package/evt-emitter) which simply add's a *createListener* factory along with the default events module.
