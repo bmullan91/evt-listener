@@ -2,11 +2,17 @@
   "name": "evt-listener",
   "version": "1.0.0",
   "description": "EventListener, as an object.",
+  "author": "Brian Mullan <bmullan91@gmail.com>",
   "main": "index.js",
+  "homepage": "https://github.com/bmullan91/evt-listener",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bmullan91/evt-listener.git"
+  },
   "scripts": {
     "test": "./node_modules/.bin/mocha",
-    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec && npm run coveralls",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec",
+    "coveralls": "coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "keywords": [
     "evt-listener",
@@ -14,7 +20,6 @@
     "listener",
     "EventListener"
   ],
-  "author": "Brian Mullan <bmullan91@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "mocha": "~1.21.4",
