@@ -1,10 +1,7 @@
 var EventEmitter = require('events').EventEmitter;
+var assert = require('assert');
 
-function EventListener(emitter, event) {
-  if (!(this instanceof EventListener)){
-    return new EventListener(emitter, event);
-  }
-
+function validate(emitter, event) {
   if(!(emitter instanceof EventEmitter)) {
     throw new Error('emitter must be an instance of EventEmitter');
   }
@@ -12,6 +9,17 @@ function EventListener(emitter, event) {
   if(!event || typeof event !== 'string') {
     throw new Error('invalid event');
   }
+
+  //it's all goood
+  return true;
+}
+
+function EventListener(emitter, event) {
+  if (!(this instanceof EventListener)){
+    return new EventListener(emitter, event);
+  }
+
+  assert(validate(emitter, event));
 
   this.emitter = emitter;
   this.event = event;
