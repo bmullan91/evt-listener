@@ -8,17 +8,17 @@ A class encapsulating an event and it's listener together.
 
 ###Why would you use it?
 
-Whenever you create an event listener, and you want to **off** the event you must pass the same function you passed to **on** to **off** the event correctly.
+Whenever you create an event listener and need to eventually turn it off, you would pass the same function passed to emitter.**on** to emitter.**removeListener** to do so.
 
-Creating an EventListener allows you to just call **off** without having to worry about saving and passing the function. See below for a comparison.
+Creating an EventListener (the class behind evt-listener) allows you to just call listener.**off** (where *listener* would be an instance of EventListener) without having to worry about saving and passing the event name and function. See below for a comparison.
 
-##First install it
+##Prerequisites
 
-With npm, saving it as a dependency.
+Install it using npm, saving it as a dependency.
 
     npm i evt-listener --save
 
-They both share the same event emitter boilerplate code:
+Both examples share the same event emitter boilerplate code.
 
 ```js
 var EventEmitter = require('events').EventEmitter;
@@ -30,7 +30,7 @@ var emitter = new EventEmitter();
 ####Without EventListener
 
 ```js
-//we have to save event name and the listener
+//we have to save the event name and the listener
 var eventName = 'eventName';
 var listener = function(payload) {
   console.log('Event ' + eventName + ' triggered with: ' + playload);
@@ -60,28 +60,30 @@ eventNameListener.off();
 
 ##Tips
 
-__1.__ You can chain your listener function after you create the EventListener instance.
+__1.__ Name your listeners appropriately!
+
+__2.__ You can chain your listener function after you create an EventListener instance.
 
 ```js
 //create a listener, giving it a handler
-var listener = new EventListener(emitter, 'eventName').on(function(payload) {
+var eventNameListener = new EventListener(emitter, 'eventName').on(function(payload) {
   console.log('Event ' + listener.event + ' triggered with: ' + playload);
 });
 
 //same goes for once
-var listener = new EventListener(emitter, 'eventName').once(function(payload) {
+var eventNameListener = new EventListener(emitter, 'eventName').once(function(payload) {
   console.log('Event ' + listener.event + ' triggered with: ' + playload);
 });
 ```
 
-__2.__ Don't like using the *new* keyword in javascript? No worries.
+__3.__ Don't like using the *new* keyword in javascript? No worries.
 
 ```js
 var EventListener = require('evt-listener');
 var listener = EventListener(emitter, 'eventName');
 ```
 
-__3.__ Prefer the revealing module pattern?
+__4.__ Prefer the revealing module pattern?
 
 ```js
 var EventListener = require('evt-listener').EventListener;
@@ -89,4 +91,4 @@ var EventListener = require('evt-listener').EventListener;
 
 ##PS
 
-Check out [evt-emitter](https://www.npmjs.org/package/evt-emitter) which adds a __createListener__ factory method on the EventEmitter prototype. This allows you to create instance's of EventListener without having to pass an event emitter.
+Check out [evt-emitter](https://www.npmjs.org/package/evt-emitter) which adds a __createListener__ factory method on the EventEmitter prototype. This allows you to create instances of EventListener without having to pass an emitter.
