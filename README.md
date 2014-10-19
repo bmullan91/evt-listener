@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bmullan91/evt-listener.svg?branch=master)](https://travis-ci.org/bmullan91/evt-listener) [![Coverage Status](https://img.shields.io/coveralls/bmullan91/evt-listener.svg)](https://coveralls.io/r/bmullan91/evt-listener)
+[![Build Status](https://travis-ci.org/bmullan91/evt-listener.svg?branch=master)](https://travis-ci.org/bmullan91/evt-listener) [![Coverage Status](https://img.shields.io/coveralls/bmullan91/evt-listener.svg)](https://coveralls.io/r/bmullan91/evt-listener?branch=master)
 
 #evt-listener
 
