@@ -39,7 +39,7 @@ var listener = function(payload) {
 emitter.on(eventName, listener);
 
 //sometime later...
-emitter.off(eventName, listener);
+emitter.removeListener(eventName, listener);
 ``` 
 
 ####With EventListener
