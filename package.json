@@ -1,6 +1,6 @@
 {
   "name": "evt-listener",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "EventListener, as an object.",
   "author": "Brian Mullan <bmullan91@gmail.com>",
   "main": "index.js",

@@ -1,18 +1,18 @@
 [![Build Status](https://travis-ci.org/bmullan91/evt-listener.svg?branch=master)](https://travis-ci.org/bmullan91/evt-listener) [![Coverage Status](https://img.shields.io/coveralls/bmullan91/evt-listener.svg)](https://coveralls.io/r/bmullan91/evt-listener?branch=master)
 
-#evt-listener
+# evt-listener
 
-###What is it?
+### What is it?
 
 A class encapsulating an event and it's listener together.
 
-###Why would you use it?
+### Why would you use it?
 
 Whenever you create an event listener and need to eventually turn it off, you would pass the same function passed to emitter.**on** to emitter.**removeListener** to do so.
 
 Creating an EventListener (the class behind evt-listener) allows you to just call listener.**off** (where *listener* would be an instance of EventListener) without having to worry about saving and passing the event name and function. See below for a comparison.
 
-##Prerequisites
+## Prerequisites
 
 Install it using npm, saving it as a dependency.
 
@@ -25,9 +25,9 @@ var EventEmitter = require('events').EventEmitter;
 var emitter = new EventEmitter();
 ```
 
-#Comparison
+# Comparison
 
-####Without EventListener
+#### Without EventListener
 
 ```js
 //we have to save the event name and the listener
@@ -42,7 +42,7 @@ emitter.on(eventName, listener);
 emitter.removeListener(eventName, listener);
 ``` 
 
-####With EventListener
+#### With EventListener
 
 ```js
 var EventListener = require('evt-listener');
@@ -58,7 +58,7 @@ eventNameListener.on(function(payload) {
 eventNameListener.off();
 ``` 
 
-##Tips
+## Tips
 
 __1.__ Name your listeners appropriately!
 
@@ -89,6 +89,6 @@ __4.__ Prefer the revealing module pattern?
 var EventListener = require('evt-listener').EventListener;
 ```
 
-##PS
+## PS
 
 Check out [evt-emitter](https://www.npmjs.org/package/evt-emitter) which adds a __createListener__ factory method on the EventEmitter prototype. This allows you to create instances of EventListener without having to pass an emitter.
